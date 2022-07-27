@@ -1,0 +1,47 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Songs{%endblock%}
+{%block content%}
+<h1>Songs</h1>
+<center>
+<table border="1">
+    <thead>
+        <tr>            
+            <td></td> <!-- Cover art, dead space -->
+            <td>Title</td>
+            <td>Album</td>
+            <td>Track Number</td>
+            <td>Length</td>
+	    <td>Enqueue</td>
+            <td>Edit Metadata</td>
+	    <td>Open</td>
+	    <td><a href="javascript:;" class="btn" onclick="startShuffle()">Shuffle all</a></td>
+        </tr>
+    </thead>
+    {%for song in songs%}
+    <tr>
+        
+        <td><center><image width="50" height="50" src="/artwork/{{song[db_song_unallocated_space]}}"></image></center></td>
+        <td><center><a href="javascript:;" class="btn" onclick="playSong({{song[db_song_id]}})">{{song[db_song_title]}}</a></center></td>
+        <td><center><a href="/album-data/{{song[db_song_unallocated_space]}}" class="btn">{{song[db_song_album]}}</a></center></td>
+        <td><center>{{song[db_song_track_number]}}</center></td>
+	<td><center>{{song[db_song_length]}}</center></td>
+	<td><center><a href="javascript:;" class="btn" onclick="upNextSong({{song[db_song_id]}})">Enqueue</a></center></td>
+        <td><center><a href="/edit-metadata/song/{{song[db_song_id]}}" class="btn" target="_blank">Edit</a></center></td>
+      <td><center><a href="/player/{{song[db_song_id]}}" class="btn" target="_blank">Open</a></center></td>
+      <td>
+	<form method="post" action="/playlists/append">
+	  <label for="playlist-select{{loop.index}}">Select playlist</label>
+	  <select name="playlist-select{{loop.index}}" id="playlist-select{{loop.index}}">
+	    <option value="">Select playlist</option>
+	      {%for playlist in playlists%}
+	      <option value="{{playlist}}">{{playlist}}</option>
+	      {%endfor%}
+	    </select>
+	    <a href="javascript:;" class="btn" onclick="addToPlaylist({{loop.index}}, {{song[db_song_id]}});">Add</a>
+	</form>
+      </td>
+    </tr>
+    {%endfor%}
+</table>
+</center>
+{%endblock%}

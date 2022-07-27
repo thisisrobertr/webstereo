@@ -1,0 +1,53 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Album {{name}}{%endblock%}
+{%block content%}
+<a href="{{url_for('albums_page')}}" class="btn"><h1>ALL ALBUMS</h1></a>
+<center>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                  <img width="512px" height="512px" src="/artwork/{{album_data[db_album_id]}}">
+		  <br />
+		  <b>{{album_data[0]}}</b>
+		  <br />
+		  <b>{{album_data[1]}}</b>
+		  <p><b>{{album_data[2]}}</b>&nbsp&nbsp&nbsp<b>({{album_data[4]}})</b></p>
+			
+                </td>
+                <td>
+                    <a href="#" class="btn" onclick="playAlbum('{{album_data[db_album_id]}}')">Play all</a>
+                    <a href="/edit-metadata/album/{{album_data[db_album_id]}}" class="btn">Edit Metadata</a>
+                    <table border="1">
+		      <thead>
+			<tr>
+			  <td><p>Enqueue</p></td>
+			  <td></td>
+			  <td><p>Edit</p></td>
+			</tr>
+		      </thead>
+                      {%for song in data%}
+		      <tr>
+			<td><a href="javascript:;" class="btn" onclick="upNextSong({{song[db_song_id]}})">Enqueue</a></td>
+			<td><a href="#" class="btn" onclick="playSong({{song[db_song_id]}})">{{song[db_song_title]}}</a></td>
+			<td><a href="/edit-metadata/song/{{song[db_song_id]}}" class="btn" target="_blank">Edit</a></td>
+			<td>
+			  <form method="post" action="/playlists/append">
+			    <label for="playlist-select{{loop.index}}">Select playlist</label>
+			    <select name="playlist-select{{loop.index}}" id="playlist-select{{loop.index}}">
+			      {%for playlist in playlists%}
+			      <option value="{{playlist}}">{{playlist}}</option>
+			      {%endfor%}
+			    </select>
+			    <a href="javascript:;" class="btn" onclick="addToPlaylist({{loop.index}}, {{song[db_song_id]}});">Add to playlist</a>
+			  </form>
+			</td>
+		      </tr>
+                        {%endfor%}
+                    </table>
+                </td>
+            </tr>
+        </thead>
+    </table>
+</center>
+{%endblock%}

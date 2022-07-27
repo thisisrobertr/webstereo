@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Title{%endblock%}</title>
+    {%if session['dev_type'] == "desktop"%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='default.css')}}">
+    {%else%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='default.css')}}">
+    {%endif%}
+</head>
+<body>
+  <div class="main-control-panel-sticky">
+        <span id="row-width-container" style="display: none;">{{session['row_width']}}</span>
+        <center>
+          <nav>
+	    {%if require_authentication %}
+            <a href="/login">LOGIN</a>
+	    {%endif%}
+            <a href="/albums">ALBUMS</a>
+            <a href="/songs">SONGS</a>
+	    <a href="/playlists">PLAYLISTS</a>
+	    <a href="/search">SEARCH</a>
+	    {%if require_authentication %}
+            <a href="/logout">LOGOUT</a>
+	    {%endif%}
+            <br />
+	    <div align="right">
+	      <form method="post" action="/search">
+		<input type="text" name="search-query" id="search_query">
+		<input type="submit" value="SEARCH">
+	      </form>
+	    </div>
+            {%if session['active'] or not require_authentication %}
+            <a href="#" class="btn" onclick="rewind(5)"><< 5 SEC</a><!-- NB that a space is requred between '<' and the text to avoid the browser parsing this as an unrecognized HTML tag-->
+            <a href="#" class="btn" onclick="togglePause()" id="play-pause">PAUSE</a>
+	    <a href="#" class="btn" style="color: #F00;" onclick="stopPlayback()">STOP</a>
+            <a href="#" class="btn" onclick="forward(5)">5 SEC >></a>
+            <a href="#" class="btn" onclick="next()">NEXT TRACK</a>
+	    <a href="#" class="btn" onclick="startShuffle()">SHUFFLE ALL</a>
+            {%endif%}
+          </nav>
+	{%if session['active'] or not require_authentication %}
+	<table>
+	  <thead>
+	    <tr>
+	      <td>
+		<image id="current-album-cover" width="150" height="150" src="/artwork/none">
+	      </td>
+	    <td>
+	      <div id="now-playing-panel"  width="100%" height="10%">
+	    </td>
+	    </tr>
+	  </thead>
+	</table>
+	</center>
+	{%endif%}
+	</div>
+  </div>
+<div>
+</div>
+{%if error_message%}
+<h2 style="color: #FF0000;">{{error_message}}</h2>
+{%endif%}
+{%block content%}
+<p>content</p>
+{%endblock%}
+{%if session['active'] == 'YES' %}
+<center>
+  <p>{{db_statistics}}</p>
+</center>
+{%endif%}
+<script type="text/javascript" src="{{url_for('static', filename='requests.js')}}">Not Supported</script>
+<script type="text/javascript" src="{{url_for('static', filename='nowplaying.js')}}">Not Supported</script>
+</body>
+</html>

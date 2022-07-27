@@ -1,0 +1,17 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Edit Metadata{%endblock%}
+{%block content%}
+<center>
+    <h1>EDIT METADATA</h1>
+    <h3>{{song[1]}}</h3>
+    <form method="post" action="/edit-metadata/song/{{song[db_song_id]}}" enctype="multipart/form-data">
+      <input type="text" size="64" name="title" id="title" value="{{song[1]}}">
+      <br />
+      <input type="text" size="64" name="new album" id="new album" value="{{song[2]}}">
+      <br />
+      <input type="text" size="64" name="number" id="number" value="{{song[3]}}">
+      <br />
+      <input type="submit" value="Save">
+</form>
+</center>
+{%endblock%}

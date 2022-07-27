@@ -1,0 +1,58 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Albums{%endblock%}
+{%block content%}
+<style>
+  /* I know that using inline styles is bad practice. However, this is templated using a flask global, so it must be put here. */
+  .truncated {
+ display: block;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ width: {{album_artwork_size}}px;
+ margin: 0px;
+ padding: 0px;
+ line-height: 16pt;
+  }
+  /* prevent inversion of colors on hover- it doesn't work properly with multiple lines */
+  .album-link:link {
+      color: #000;
+      text-decoration: none;
+      margin: 0px;
+      line-height: 16pt;
+  }
+  .album-link:visited {
+      color: #000;
+      text-decoration: none;
+      margin: 0px;
+      line-height: 16pt;
+  }
+  .album-link:hover {
+      color: #000;
+      text-decoration: none;
+      margin: 0px;
+      line-height: 16pt;
+  }
+</style>
+<span id="albums-row-width-container" style="display:none;">{{row_width}}</span>
+<center>
+<table id="album-chart">
+   {%for row in albums%}
+   {%set row_loop = loop%}
+ <tr>
+  {%for album in row%}
+  <td width="{{album_artwork_size}}" height="{{album_artwork_size}}">
+        <span id="argument{{row_loop.index}}{{loop.index}}" style="display: none;">/album-data/{{album[0]}}</span>
+	<a href="/album-data/{{album[db_album_id]}}" class="album-link">
+	  <image class="album-cover-display" width="{{album_artwork_size}}" height="{{album_artwork_size}}" src="/artwork/{{album[db_album_id]}}"></image>
+	<p class="truncated"><b>{{album[0]}}</b></p>
+	  <p class="truncated" href="/album-data/{{album[db_album_id]}}"><b>{{album[1]}}</b></p></a>
+	<br />
+    </td>
+  {%endfor%}
+ </tr>
+  {%endfor%}
+</table>
+</center>
+<span id="retrieve-album-size" style="display: none;">{{album_artwork_size}}</span>
+<script type="text/javascript" src="{{url_for('static', filename='recompute-album-sizes.js')}}">Not Supported</script>
+{%endblock%}

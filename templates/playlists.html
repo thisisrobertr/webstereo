@@ -1,0 +1,42 @@
+{%extends "layout.html"%}
+{%block title%}webstereo Playlists{%endblock%}
+{%block content%}
+<center>
+  <form method="post">
+    <input type="text" name="plname">
+    <input type="submit" value="CREATE PLAYLIST">
+  </form>
+  {%for playlist in contents%}
+  <table border="1" width="80%">
+    <thead>
+      <tr>
+	<td colspan="3"><h4>{{playlist.title}}</h4></td>
+	<td>
+	  <h5>Last modified on {{playlist.modified_time}}</h5>
+</td>
+<td><a href="javascript:;" class="btn" onclick="startShuffle('{{playlist.title}}')">Shuffle All</a></td>
+  
+      </tr>
+      <tr>
+	<td></td> <!-- compensate for 'play' and 'enqueue' spaces -->
+	<td></td>
+	<td>Title</td>
+	<td>Album</td>
+    </thead>
+    {%set out_loop = loop%}
+    {%for j in playlist.contents%}
+    {#prevents excess empty table cells#}
+    {%if j[1] != '' and loop.index > 1%}
+    <tr>
+      <td><a href="javascript:;" class="btn" onclick="playSong({{j[db_song_id]}})">Play</a></td>
+      <td><a href="javascript:;" class="btn" onclick="upNextSong({{j[db_song_id]}})">Enqueue</a></td>
+      <td><a href="javascript:;" class="btn" onclick="playSong({{j[db_song_id]}});">{{j[db_song_title]}}</a></td>
+      <td><a href="/album-data/{{j[db_song_unallocated_space]}}" class="btn">{{j[db_song_album]}}</a></td>
+      <td><a href="javascript:;" style="color: #F00;" class="btn" onclick="deleteFromPlaylist('{{playlist.title}}', {{j[db_song_id]}});">Delete</a></td>
+    </tr>
+    {%endif%}
+    {%endfor%}
+  </table>
+  {%endfor%}
+</center>
+{%endblock%}

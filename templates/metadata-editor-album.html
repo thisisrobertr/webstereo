@@ -1,0 +1,22 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Edit Metadata{%endblock%}
+{%block content%}
+<center>
+    <h1>EDIT METADATA</h1>
+    <h3>{{album[db_album_title]}}</h3>
+    <h3>{{album[db_album_artist]}}</h3>
+    <form method="post" action="/edit-metadata/album/{{album[db_album_id]}}" enctype="multipart/form-data">
+      <input type="text" name="title" id="title" value="{{album[0]}}">
+      <br />
+      <input type="text" name="artist" id="artist" value="{{album[1]}}">
+      <br />
+      <input type="text" name="genre" id="genre" value="{{album[2]}}">
+      <br />
+      <input type="text" name="year" id="year" value="{{album[4]}}">
+      <br />
+      <input type="file" name="artworkupload">
+      <br />
+      <input type="submit" value="Save">
+</form>
+</center>
+{%endblock%}

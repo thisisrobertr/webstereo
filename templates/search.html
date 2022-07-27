@@ -1,0 +1,58 @@
+{%extends "layout.html"%}
+{%block title%}webstereo - Search{%endblock%}
+{%block content%}
+<center>
+  <form method="post">
+    <input type="text" name="search-query" id="search_query">
+    <input type="submit" value="SEARCH">
+  </form>
+  {%if results%}
+  <h3>Results: {{quantity_msg}}</h3>
+  <h4>Songs:</h4>
+  <table border="1">
+    <thead>
+      <tr>
+	<td></td> <!-- enqueue, dead space -->
+	<td>Title</td>
+	<td>Album</td>
+	<td>Track Number</td>
+	<td>Length</td>
+      </tr>
+    </thead>
+    {%for song in results_song%}
+    <!--<span style="display:none;" id="search-panel-song{{loop.index}}">{{song[1]}}</span>
+    <span style="display:none;" id="search-panel-album{{loop.index}}">{{song[2]}}</span>-->
+    <tr>
+      <td><a class="btn" href="javascript:;" onclick="upNextSong({{song[db_song_id]}})">Enqueue</a></td>
+      <td><a class="btn" href="javascript:;" onclick="playSong({{song[db_song_id]}});">{{song[db_song_title]}}</a></td>
+      <td><a class="btn" href="/album-data/{{song[db_song_unallocated_space]}}">{{song[2]}}</td>
+      <td>{{song[3]}}</td>
+      <td>{{song[4]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+  <hr />
+  <h4>Albums:</h4>
+  <table border="1">
+    <thead>
+      <tr>
+	<td>Title</td>
+	<td>Artist</td>
+	<td>Genre</td>
+	<td>Year</td>
+	</tr>
+    </thead>
+    {%for album in results_album%}
+    <tr>
+      <td><a href="/album-data/{{album[db_album_id]}}" class="btn">{{album[0]}}</td>
+      <td>{{album[1]}}</td>
+      <td>{{album[2]}}</td>
+      <td>{{album[4]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+  {%else%}
+  <h3>No Results</h3>
+  {%endif%}
+</center>
+{%endblock%}

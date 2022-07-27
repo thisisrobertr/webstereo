@@ -1,0 +1,62 @@
+p {
+    font-family: sans-serif;
+    font-size: 25pt;
+}
+h1 {
+    font-family: sans-serif;
+    font-size: 32pt;
+}
+td {
+    font-family: sans-serif;
+    font-size: 25px;
+}
+a:link {
+    font-family: sans-serif;
+    font-size: 25px;
+    color: #00F;
+}
+a:visited {
+    font-family: sans-serif;
+    font-size: 25pt;
+    color: #00F;
+}
+a:hover {
+    font-family: sans-serif;
+    font-size: 25pt;
+    background-color: #00F;
+    color: #FFF;
+}
+li {
+    font-family: sans-serif;
+    font-size: 25pt;
+    color: #000;
+}
+td {
+    font-size: 25pt;
+    color: #000;
+}
+a.btn:link{
+    color: #000;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25pt;
+}
+a.btn:visited{
+    color: #000;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25pt;
+}
+a.btn:hover {
+    color: #FFF;
+    background: #000;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25pt;
+}

@@ -1,0 +1,37 @@
+<center>
+    <table style="display: table-row;">
+        <thead>
+          <tr>
+	    <td id="up-prev-display" style="vertical-align: top;">
+		<h4><b>PREVIOUSLY PLAYED</b></h4>
+		<ol>
+		  {%for song in prev_queue%}
+		  <li><a href="javascript:;" class="btn" onclick="playSong({{song[db_song_id]}})">{{song[db_song_title]}}</a></li>
+		  {%endfor%}
+		</ol>
+	    </td>
+            <td id="up-next-display" style="vertical-align: top;">
+		<h4><b>UP NEXT</b><a href="#" class="btn" onclick="purge()" style="color: #FF0000;">&nbsp;&nbsp;(CLEAR)</a></h4>
+		<ol>
+                  {%for song in next_queue%}
+		  {%if loop.index < 11%}
+				    <li><a href="javascript:;" class="btn" onclick="playSong({{song[db_song_id]}})">{{song[db_song_title]}}</a></li>
+			 {%endif%}
+				    
+                  {%endfor%}
+		</ol>
+	    </td>
+            <td>
+	      <div style="top:0;right:0;">
+                    <p id="np-song">{{song}}</p>
+                    <p id="np-album">{{album}}</p>
+                    <p id="np-track">{{track}}</p>
+		    <!-- guarantee that proportional fonts will not affect the alignment of the text-->
+                    <p id="np-time" style="letter-spacing: 1px;">{{time}} / {{length}}</p>
+	      </div>
+	    </td>
+            </tr>
+        </thead>
+</table>
+<span style="display:none;" id="nowplaying-album-notify">{{album}}</span>
+</center>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {%if session['dev_type'] == 'desktop'%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='default.css')}}">
+    {%else%}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='default-mobile.css')}}">
+    {%endif%}
+    
+</head>
+<body>
+        <span id="row-width-container" style="display: none;">{{session['row_width']}}</span>
+        <center>
+	  <div id="main-control-panel-sticky">
+	  <!-- 18:56 12.06.21 -->
+	  {%if session['dev_type'] == 'desktop'%}
+          <nav>
+            <a href="javascript:;" onclick="page('/login')">LOGIN</a>
+            <a href="javascript:;" onclick="page('/albums')">ALBUMS</a>
+            <a href="javascript:;" onclick="page('/songs')">SONGS</a>
+            <a href="/logout">LOGOUT</a>
+            <br />
+            {%if session['active'] == 'YES'%}
+            <a href="#" class="btn" onclick="previous()"><< PREVIOUS TRACK</a>
+            <a href="#" class="btn" onclick="rewind(5)"><< 5 SEC</a>
+            <a href="#" class="btn" onclick="togglePause()" id="play-pause">PAUSE</a>
+	    <a href="#" class="btn" onclick="toggleLocal()" id="toggle-local">PLAY SONGS REMOTELY</a>
+	    <a href="#" class="btn" style="color: #F00;" onclick="stopPlayback()">STOP PLAYBACK</a>
+            <a href="#" class="btn" onclick="forward(5)">5 SEC >></a>
+            <a href="#" class="btn" onclick="next()">NEXT TRACK >></a>
+            {%endif%}
+          </nav>
+	  {%else%}
+	  <!-- Use a different layout on mobile to account for the narrower screen and place the buttons
+	       in a sensible arrangement.-->
+	  <nav>
+	    <a href="javascript:;" onclick="page('/login')">LOGIN</a>
+            <a href="javascript:;" onclick="page('/albums')">ALBUMS</a>
+            <a href="javascript:;" onclick="page('/songs')">SONGS</a>
+            <a href="/logout">LOGOUT</a>
+	    <br />
+	    {%if session['active'] == 'YES'%}
+	    <a href="#" class="btn" onclick="previous()"><< PREVIOUS TRACK</a><!-- Using << for arrows causes RMS Emacs to fuck up on indenting. AI hellscape deferred perhaps a few years-->
+	    <a href="#" class="btn" onclick="next()">NEXT TRACK >></a>
+            <br />
+            <a href="#" class="btn" onclick="rewind(5)"><< 5 SEC</a>
+	    <a href="#" class="btn" onclick="forward(5)">5 SEC >></a>
+	    <br />
+	    <a href="#" class="btn" onclick="togglePause()" id="play-pause">PAUSE</a>
+	    <a href="#" class="btn" onclick="toggleLocal()" id="toggle-local">PLAY SONGS REMOTELY</a>
+	    <a href="#" class="btn" style="color:#F00;" onclick="stopPlayback()">STOP PLAYBACK</a>
+	    {%endif%}
+	    {%endif%}
+	<div id="audio-player">
+    </div>
+    {%if session['active'] == "YES"%}
+    <div id="now-playing-panel" width="100%" height="10%">
+    <p>Now Playing</p>
+</div>
+    {%endif%}
+</center>
+</div>
+<div id="content">
+</div>
+<script type="text/javascript" src="{{url_for('static', filename='pages.js')}}">Not Supported</script>
+<script type="text/javascript" src="{{url_for('static', filename='requests.js')}}">Not Supported</script>
+<script type="text/javascript" src="{{url_for('static', filename='nowplaying.js')}}">Not Supported</script>
+</body>
+</html>

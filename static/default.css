@@ -1,0 +1,102 @@
+.main-control-panel-sticky{
+    width: 100%;
+    background: #FFF;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+p {
+    font-family: "Helvetica";
+    size: 11pt;
+}
+h1 {
+    font-family: "Helvetica";
+    size: 32pt;
+}
+h2 {
+    font-family: "Helvetica";
+    size: 26pt;
+}
+h3 {
+    font-family: "Helvetica";
+    size: 22pt;
+}
+h4 {
+    font-family: "Helvetica";
+    size: 18pt;
+}
+h5 {
+    font-family: "Helvetica";
+    size: 16pt;
+}
+td {
+    font-family: "Helvetica";
+    size: 11pt;
+}
+a:link {
+    font-family: "Helvetica";
+    size: 11pt;
+    color: #00F;
+}
+a:visited {
+    font-family: "Helvetica";
+    size: 11pt;
+    color: #00F;
+}
+a:hover {
+    font-family: "Helvetica";
+    size: 11pt;
+    background-color: #00F;
+    color: #FFF;
+}
+li {
+    font-family: "Helvetica";
+    size: 11pt;
+    color: #000;
+}
+td {
+    color: #000;
+}
+button {
+    background: none !important;
+    border:none;
+    text-decoration: underline;
+}
+input[type=submit] {
+    background: none !important;
+    border:none;
+    text-decoration: underline;
+}
+input[type=file] {
+    background: none !important;
+    border:none;
+    text-decoration: underline;
+}
+a.btn:link{
+    color: #000;
+    font-family: "Helvetica";
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    size: 11pt;
+}
+a.btn:visited{
+    color: #000;
+    font-family: "Helvetica";
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    size: 11pt;
+}
+a.btn:hover {
+    color: #FFF;
+    background-color: #000;
+    font-family: "Helvetica";
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    size: 11pt;
+}
+#album-chart {
+    table-layout: fixed;
+}

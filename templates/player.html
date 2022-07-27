@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>webstereo - Player</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='default.css')}}">
+</head>
+<body>
+<center>
+  <div width="50%" height="100%" style="float:left">
+    <image width="100%" height="100%" src="/artwork/{{song[2]}}"></image>
+  </div>
+  <div>
+    <h2>{{song[1]}}</h2>
+    <h4>{{song[2]}}</h4>
+    <h4>{{song[3]}}</h4>
+    <h4>{{song[4]}}</h4>
+  </ul>
+  </div>
+  <audio autoplay controls src="/get-audio-file/{{song[db_song_id]}}">Not supported</audio>
+</center>
+</div>
+</body>
+</html>
