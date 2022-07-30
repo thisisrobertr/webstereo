@@ -1,4 +1,4 @@
-#WebStereo
+# WebStereo
 
 ## WebStereo is a program to manage a music library with a browser-based interface.
 
