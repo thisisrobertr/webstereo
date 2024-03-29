@@ -20,15 +20,18 @@ When Apple designated iTunes as end-of-life in favor Music.app (centered around 
       `source venv/bin/activate`
 
 3. Install Dependencies
-    - WebStereo has one main external dependency: `ffmpeg`, with `ffplay` included. To get the `ffplay` command, I had to build ffmpeg from source - the Homebrew package did not include it. If you choose to install from source, be advised that `make` will silently fail to compile the `ffplay` component of the package unless you have sdl2 installed.
+    - The following python modules are required: flask and waitress (undergirding the web app), pbkdf2 (password hashing), and mutagen (for processing audio metadata).
+    
+    - WebStereo has one other main external dependency: `ffmpeg`, with `ffplay` included. To get the `ffplay` command, I had to build ffmpeg from source - the Homebrew package did not include it. If you choose to install from source, be advised that `make` will silently fail to compile the `ffplay` component of the package unless you have sdl2 installed.
     
 4. Configure WebStereo.
     - There are two main ways WebStereo can be configured: editing config.json directly, and using the command-line options of data.py. For the first method, run data.py with -c to generate a file with the default parameters, and open the new config.json in an editor. For the second, run `data.py -h` to view the available commands.
- 
+      	    - NB that on recent versions of macOS, the directory shown in Finder as "Media" is actually called "Media.localized" in the file system. MacOS 10.14 Mojave doesn't do this, 14.4 Sonoma does. I'm not sure when exactly the change was made.
+	    
 5. Build the Music Database
     - Once you have specified the location of your music library in config.json, run `python3 data.py -b -a` to add your albums to the WebStereo library.
     
-    - The first versions of WebStereo were used on an existing iTunes media library, and the import engine is very much designed with that in mind: it expects that you have folders for each artist, inside of which there is a folder for each album containing the audio files for each song. Files outside of this directory structure will not be included.
+    - The first versions of WebStereo were used on an existing iTunes media library, and the code for building the library database was very much written for that environment: it expects that you have folders for each artist, inside of which there is a folder for each album containing the audio files for each song. Files outside of this directory structure will not be included.
      
 6. Run WebStereo.
     - Run `python3 webstereo.py` or deploy it to your server configuration
@@ -38,10 +41,10 @@ When Apple designated iTunes as end-of-life in favor Music.app (centered around 
 ---
 
 ## III. Considerations and Notes
-- While there is support for using a password to access WebStereo (it can be enabled and disabled in configuration), it is very much designed for a single-user environment.
+- Webstereo supports using a password for authentication but not a username; it is very much designed for a single-user environment.
 
 - At present, supported audio formats include the following: AAC/M4A, MP3, AIFF/AIFC, FLAC, WAVE, and OGG. If possible, metadata will be extracted from the files, otherwise file/folder names and such will be used to guess at title, artist, album, and track number.
 
 - Currently, there is no built-in mechanism for importing new audio; adding songs means modifying the filesystem and rebuilding the entire database.
 
-- Despite my best efforts to date, WebStereo has not moved beyond its origins as a tool I wrote to fulfill a personal need - there are still several missing features and imperfections in it. Please take it in that context.
+- Despite my best efforts to date, WebStereo has not moved beyond its origins as a tool I wrote to fulfill a personal need - there are still several missing features and imperfections in it. Please take it in that context. Eventually, I joined the herd on Spotify, and development on this program has by and large stopped.

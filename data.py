@@ -547,7 +547,7 @@ class WebStereoDB:
                                 except Exception as e:
                                     log.error('failed to read :%s' % song, )
                                     continue
-
+                                
                                 song_file.pprint()
                                 try:
                                     song_album = song_file.tags['TALB'][0]
@@ -558,6 +558,9 @@ class WebStereoDB:
                                     # NoneType returned, not subscriptable
                                     song_album = album
 
+
+                                if song_file.tags is None: continue
+                                
                                 try:
                                     song_number = song_file.tags['TRCK']
                                 except KeyError:
@@ -1112,7 +1115,12 @@ if os.path.exists('config.json'):
 else:
    reset_configuration_file()
 
-VALID_PASSWORD = configuration['password-hash']
+try:
+    VALID_PASSWORD = configuration['password-hash']
+except KeyError:
+    if configuration['authenticate']:
+        raise RuntimeError('Authentication is enabled but no password has been set. Please set a password using the -p option')
+    
 DB_PATH = configuration['db-path']
 
 USAGE='''
